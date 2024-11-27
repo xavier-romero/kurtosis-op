@@ -1,0 +1,17 @@
+FROM xavierromero/op-tools as base
+
+WORKDIR /repos/optimism
+RUN bash -c "PS1=foo source ~/.bashrc && make op-node op-batcher op-proposer"
+
+WORKDIR /repos
+RUN git clone https://github.com/ethereum-optimism/op-geth.git
+
+WORKDIR /repos/op-geth
+RUN bash -c "PS1=foo source ~/.bashrc && make geth"
+
+
+FROM ubuntu:22.04 as final
+COPY --from=base /repos/op-geth/build/bin/geth /usr/local/bin/geth
+COPY --from=base /repos/optimism/op-node/bin/op-node /usr/local/bin/op-node
+COPY --from=base /repos/optimism/op-batcher/bin/op-batcher /usr/local/bin/op-batcher
+COPY --from=base /repos/optimism/op-proposer/bin/op-proposer /usr/local/bin/op-proposer

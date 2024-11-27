@@ -1,0 +1,37 @@
+FROM ubuntu:22.04
+
+ARG NODE_VERSION=v20.18.1
+ARG GO_VERSION=1.22.9
+
+SHELL ["/bin/bash", "-c"]
+WORKDIR /tmp
+
+# Install the necessary packages
+RUN apt update && apt install -y curl jq git vim build-essential
+
+# Install Foundry
+RUN curl -L https://foundry.paradigm.xyz | bash
+RUN /root/.foundry/bin/foundryup
+RUN ln -s /root/.foundry/bin/cast /usr/local/bin/cast
+RUN ln -s /root/.foundry/bin/forge /usr/local/bin/forge
+RUN ln -s /root/.foundry/bin/foundryup /usr/local/bin/foundryup
+
+# Install node
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+RUN NVM_DIR="$HOME/.nvm" && source "$NVM_DIR/nvm.sh"  && nvm install $NODE_VERSION
+
+# Install pnpm
+RUN curl -fsSL https://get.pnpm.io/install.sh | bash -
+RUN cp -f ~/.local/share/pnpm/pnp* /usr/local/bin/
+
+# Install go
+RUN curl -fsSL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+RUN echo "export PATH=\$PATH:/usr/local/go/bin" >> ~/.bashrc
+
+# Optimism setup
+WORKDIR /repos
+RUN git clone https://github.com/ethereum-optimism/optimism.git
+WORKDIR /repos/optimism
+RUN git checkout tutorials/chain
+RUN bash -c "PS1=foo source ~/.bashrc && pnpm install"
+RUN bash -c "PS1=foo source ~/.bashrc && pnpm build"

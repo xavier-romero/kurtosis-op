@@ -1,0 +1,37 @@
+{
+    "l1": {
+        "chain_id": 271828,
+        "preallocated_mnemonic": "code code code code code code code code code code code quality",
+        "seconds_per_slot": 2,
+        "rpc_public_port": false
+    },
+    "l2": {
+        "chain_id": 666,
+        "blocktime": 2
+    },
+    "addresses": {
+        "admin": {
+          "mnemonic": "code code code code code code code code code code code quality",
+          "l1_eth_amount": 10
+        },
+        "proposer": {
+          "address": "0x5b06837A43bdC3dD9F114558DAf4B26ed49842Ed",
+          "private_key": "0x183c492d0ba156041a7f31a1b188958a7a22eebadca741a7fe64436092dc3181",
+          "l1_eth_amount": 10
+        },
+        "batcher": {
+          "address": "0xCae5b68Ff783594bDe1b93cdE627c741722c4D4d",
+          "private_key": "0x2857ca0e7748448f3a50469f7ffe55cde7299d5696aedd72cfe18a06fb856970",
+          "l1_eth_amount": 10
+        },
+        "sequencer": {
+            "address": "0x5b06837A43bdC3dD9F114558DAf4B26ed49842Ed",
+            "private_key": "0x183c492d0ba156041a7f31a1b188958a7a22eebadca741a7fe64436092dc3181"
+        }
+    },
+    "images": {
+        "op-geth": "xavierromero/op:latest",
+        "op-node": "xavierromero/op:latest",
+        "op-batcher": "xavierromero/op:latest"
+    }
+}

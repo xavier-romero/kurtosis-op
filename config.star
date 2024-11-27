@@ -41,7 +41,7 @@ def op_geth_config(cfg):
             --authrpc.addr=0.0.0.0 \
             --authrpc.port=8551 \
             --authrpc.jwtsecret=/in/jwt.txt \
-            --rollup.disabletxpoolgossip=true',
+            --rollup.disabletxpoolgossip=true || sleep infinity',
         ],
         "vars": {},
         "artifacts": ["genesis.json", "jwt.txt"],
@@ -78,7 +78,7 @@ def op_node_config(cfg):
             --l1="
             + L1_RPC_URL
             + " \
-            --l1.rpckind=debug_geth",
+            --l1.rpckind=debug_geth || sleep infinity",
         ],
         "vars": {},
         "artifacts": ["rollup.json", "jwt.txt"],
@@ -113,7 +113,8 @@ def op_batcher_config(cfg):
             + L1_RPC_URL
             + " \
             --private-key="
-            + batcher_private_key,
+            + batcher_private_key
+            + " || sleep infinity",
         ],
         "vars": {},
         "artifacts": [],
@@ -126,7 +127,6 @@ def op_proposer(cfg):
     return {
         "name": "op-proposer",
         "image": cfg.get("images").get("op-proposer"),
-        # "cmd": [ "bash", "-c", "sleep infinity" ],
         "cmd": [
             "bash",
             "-c",

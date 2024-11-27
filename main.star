@@ -1,7 +1,6 @@
 config_package = "./config.star"
 ethereum_package = "./external/ethereum.star"
 tools_package = "./tools.star"
-op_geth_package = "./op-geth.star"
 service_package = "./service.star"
 
 

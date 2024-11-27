@@ -11,6 +11,8 @@ RUN bash -c "PS1=foo source ~/.bashrc && make geth"
 
 
 FROM ubuntu:22.04 as final
+RUN apt update && apt install -y curl jq vim
+
 COPY --from=base /repos/op-geth/build/bin/geth /usr/local/bin/geth
 COPY --from=base /repos/optimism/op-node/bin/op-node /usr/local/bin/op-node
 COPY --from=base /repos/optimism/op-batcher/bin/op-batcher /usr/local/bin/op-batcher

@@ -126,6 +126,7 @@ def op_proposer(cfg):
     return {
         "name": "op-proposer",
         "image": cfg.get("images").get("op-proposer"),
+        # "cmd": [ "bash", "-c", "sleep infinity" ],
         "cmd": [
             "bash",
             "-c",
@@ -135,14 +136,15 @@ def op_proposer(cfg):
             --rollup-rpc=http://"
             + OP_NODE_NAME
             + ":9545 \
-            --l2oo-address=$(cat "
+            --l2oo-address=$(cat /in/"
             + deploy_file
             + " | jq -r .L2OutputOracleProxy) \
             --private-key="
             + proposer_private_key
             + " \
             --l1-eth-rpc="
-            + L1_RPC_URL,
+            + L1_RPC_URL
+            + " || sleep infinity",
         ],
         "vars": {},
         "artifacts": [deploy_file],

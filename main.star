@@ -57,3 +57,11 @@ def run(plan, args):
     import_module(service_package).run(
         plan, import_module(config_package).op_batcher_config(cfg)
     )
+
+    # Deploy op-proposer
+    import_module(service_package).run(
+        plan, import_module(config_package).op_proposer(cfg)
+    )
+
+    # Fund L2 accounts
+    import_module(tools_package).execute_step(plan, "fund_accounts_on_l2")

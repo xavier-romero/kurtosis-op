@@ -11,8 +11,11 @@
     },
     "addresses": {
         "admin": {
+          "address": "0x85dA99c8a7C2C95964c8EfD687E95E632Fc533D6",
+          "private_key": "0x42b6e34dc21598a807dc19d7784c71b2a7a01f6480dc6f58258f78e539f1a1fa",
           "mnemonic": "code code code code code code code code code code code quality",
-          "l1_eth_amount": 10
+          "l1_eth_amount": 1000,
+          "l2_eth_amount": 500
         },
         "proposer": {
           "address": "0x5b06837A43bdC3dD9F114558DAf4B26ed49842Ed",
@@ -32,6 +35,7 @@
     "images": {
         "op-geth": "xavierromero/op:latest",
         "op-node": "xavierromero/op:latest",
-        "op-batcher": "xavierromero/op:latest"
+        "op-batcher": "xavierromero/op:latest",
+        "op-proposer": "xavierromero/op:latest"
     }
 }

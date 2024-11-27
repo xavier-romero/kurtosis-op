@@ -21,6 +21,10 @@ ARTIFACTS_IN = [
         "name": "generate_l2_config.sh",
         "file": "./scripts/generate_l2_config.sh",
     },
+    {
+        "name": "fund_accounts_on_l2.sh",
+        "file": "./scripts/fund_accounts_on_l2.sh",
+    },
 ]
 ARTIFACTS_OUT = {
     "path": "/out",

@@ -2,6 +2,7 @@ config_package = "./config.star"
 ethereum_package = "./external/ethereum.star"
 tools_package = "./tools.star"
 service_package = "./service.star"
+blockscout_package = "./external/blockscout.star"
 
 
 def run(plan, args):
@@ -65,3 +66,13 @@ def run(plan, args):
 
     # Fund L2 accounts
     import_module(tools_package).execute_step(plan, "fund_accounts_on_l2")
+
+    # # Deploy L2 Blockscout
+    bs_enabled = cfg.get("blockscout", {}).get("enabled")
+    if bs_enabled:
+        bs_config = {
+            "l2_chain_id": cfg["l2"]["chain_id"],
+            "l2_rpc_url": "http://op-geth:8545",
+            "l2_ws_url": "ws://op-geth:8546",
+        }
+        import_module(blockscout_package).run(plan, bs_config)

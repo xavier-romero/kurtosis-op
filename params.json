@@ -37,5 +37,8 @@
         "op-node": "xavierromero/op:latest",
         "op-batcher": "xavierromero/op:latest",
         "op-proposer": "xavierromero/op:latest"
-    }
+    },
+    "blockscout": {
+        "enabled": true
+      }
 }

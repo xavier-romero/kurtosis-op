@@ -70,6 +70,7 @@ def op_node_config(cfg):
             --verifier.l1-confs=4 \
             --rollup.config=/in/rollup.json \
             --rpc.addr=0.0.0.0 \
+            --rpc.port=8545 \
             --p2p.disable \
             --rpc.enable-admin \
             --p2p.sequencer.key="
@@ -82,6 +83,9 @@ def op_node_config(cfg):
         ],
         "vars": {},
         "artifacts": ["rollup.json", "jwt.txt"],
+        "ports": [
+            {"port": 8545},
+        ],
     }
 
 
